@@ -1,0 +1,29 @@
+<body>
+      <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright" id="view"></div>
+      </div>
+      <script type="text/javascript">
+          function getParameterByName(name, url = window.location.href) {
+              name = name.replace(/[\[\]]/g, '\\$&');
+              var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                  results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return '';
+              return decodeURIComponent(results[2].replace(/\+/g, ' '));
+          }
+          const container = document.getElementById("view")
+          const symbol = getParameterByName('pair')
+          document.addEventListener('DOMContentLoaded', function () {
+              var iframe = document.createElement('iframe')
+              iframe.setAttribute(
+                  'src',
+                  `https://s.tradingview.com/embed-widget/single-quote#{"symbol":"${symbol}","colorTheme":"dark"}`,
+              );
+              iframe.setAttribute('frameborder', 0)
+              iframe.setAttribute('style', 'box-sizing: border-box; height: 100%; width: 100%;')
+              container.appendChild(iframe)
+          });
+      </script>
+      </div>
+  </body>
